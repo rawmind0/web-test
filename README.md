@@ -11,7 +11,7 @@ docker build -t rawmind/web-test:<version> .
 
 ## Versions
 
-- `0.0.1` [(Dockerfile)](https://github.com/rawmind0/web-test/blob/master/Dockerfile)
+- `0.0.1-1` [(Dockerfile)](https://github.com/rawmind0/web-test/blob/0.0.1-1/Dockerfile)
 
 
 ## Usage
