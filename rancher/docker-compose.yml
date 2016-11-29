@@ -1,0 +1,10 @@
+web-test:
+  log_driver: ''
+  labels:
+    traefik.domain: local
+    traefik.port: '8080'
+    traefik.enable: 'true'
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  log_opt: {}
+  image: rawmind/web-test

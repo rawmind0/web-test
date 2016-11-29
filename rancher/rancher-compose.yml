@@ -1,0 +1,11 @@
+web-test:
+  scale: 3
+  health_check:
+    port: 8080
+    interval: 2000
+    initializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    request_line: GET "/" "HTTP/1.0"
+    healthy_threshold: 2
