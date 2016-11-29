@@ -20,6 +20,10 @@ docker build -t rawmind/web-test:<version> .
 docker run rawmind/web-test:<version> 
 ```
 
+## Example
+
+See [rancher-example][rancher-example], rancher catalog package that runs web-test in a cattle environment.
+
 ## Output example
 
 ```
@@ -37,3 +41,5 @@ X-Forwarded-Host: web-test.local:9080
 X-Forwarded-Proto: http
 X-Forwarded-Server: traefik_traefik_1
 ```
+
+[rancher-example]: https://github.com/rawmind0/web-test/tree/master/rancher
