@@ -38,8 +38,9 @@ func getServices() map[string]string {
 
 	for _, evar := range os.Environ() {
 		show := strings.Split(evar, "=")
-		re := regexp.MustCompile("^(INGRESS_[[:alnum:]]*|KUBERNETES)_PORT$")
-		if re.MatchString(show[0]) {
+		regName := regexp.MustCompile("^.*_PORT$")
+		regLink := regexp.MustCompile("^(tcp|udp)://.*")
+		if regName.MatchString(show[0]) && regLink.MatchString(show[1]) {
 			k8s_services[strings.TrimSuffix(show[0], "_PORT")] = show[1]
 		}
 	}
