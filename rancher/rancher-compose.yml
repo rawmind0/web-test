@@ -1,11 +1,32 @@
-web-test:
-  scale: 3
-  health_check:
-    port: 8080
-    interval: 2000
-    initializing_timeout: 60000
-    unhealthy_threshold: 3
-    strategy: recreate
-    response_timeout: 2000
-    request_line: GET "/" "HTTP/1.0"
-    healthy_threshold: 2
+version: '2'
+services:
+  web-test:
+    scale: 3
+    health_check:
+      port: 8080
+      interval: 2000
+      initializing_timeout: 60000
+      unhealthy_threshold: 3
+      strategy: recreate
+      response_timeout: 2000
+      request_line: GET "/" "HTTP/1.0"
+      healthy_threshold: 2
+  web-lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: tcp
+        service: web-test
+        source_port: 9080
+        target_port: 8080
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
