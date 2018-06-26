@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"regexp"
 )
 
 const (
@@ -37,7 +38,8 @@ func getServices() map[string]string {
 
 	for _, evar := range os.Environ() {
 		show := strings.Split(evar, "=")
-		if strings.HasSuffix(show[0], "_PORT") {
+		re := regexp.MustCompile("^(INGRESS_[[:alnum:]]*|KUBERNETES)_PORT$")
+		if re.MatchString(show[0]) {
 			k8s_services[strings.TrimSuffix(show[0], "_PORT")] = show[1]
 		}
 	}
