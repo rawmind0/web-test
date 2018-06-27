@@ -6,18 +6,20 @@ ENV WEB_HOME=/opt/web-test \
     WEB_PORT=8080 \
     GOMAXPROCS=2 \
     GOROOT=/usr/lib/go \
-    GOPATH=/opt/src \
+    GOPATH=/opt \
     GOBIN=/gopath/bin \
+    SRCDIR=/opt/src/github.com/rawmind0/web-test \
     PATH=$PATH:/opt/web-test
 
 # Add service files
 ADD root /
 
 RUN apk add --update go git musl-dev \ 
-  && mkdir -p /opt/src $WEB_HOME; cd /opt/src \
-  && cd /opt/src \
-  && go build -o web-test web-test.go \
-  && mv ./web-test ${WEB_HOME}; cd ${WEB_HOME} \
+  && mkdir -p ${SRCDIR} $WEB_HOME \
+  && cd ${SRCDIR} \
+  && go build -o web-test *.go \
+  && mv ./web-test ${WEB_HOME} \
+  && cd ${WEB_HOME} \
   && chmod +x ${WEB_HOME}/web-test \
   && apk del go git musl-dev \
   && rm -rf /var/cache/apk/* /opt/src 
