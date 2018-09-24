@@ -1,4 +1,4 @@
-FROM rawmind/alpine-base:3.7-0
+FROM rawmind/alpine-base:3.8-0
 MAINTAINER Raul Sanchez <rawmind@gmail.com>
 
 
